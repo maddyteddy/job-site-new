@@ -46,6 +46,18 @@
                     {{ trans('cruds.user.fields.password_helper') }}
                 </p>
             </div>
+            <div class="form-group">
+                <label for="vendors">{{ trans('cruds.user.fields.vendors') }}</label>
+                <select name="vendors[]" id="vendors" class="form-control select2">
+                    <option value="">--Select--</option>
+                    @foreach($vendors as $id => $vendors)
+                        <option value="{{ $id }}" {{ (in_array($id, old('vendors', [])) || isset($user) && $user->vendors->contains($id)) ? 'selected' : '' }}>{{ $vendors }}</option>
+                    @endforeach
+                </select>
+                <p class="helper-block">
+                    {{ trans('cruds.user.fields.vendors_helper') }}
+                </p>
+            </div>
             <div class="form-group {{ $errors->has('roles') ? 'has-error' : '' }}">
                 <label for="roles">{{ trans('cruds.user.fields.roles') }}*
                     <span class="btn btn-info btn-xs select-all">{{ trans('global.select_all') }}</span>

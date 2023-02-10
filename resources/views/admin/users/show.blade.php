@@ -44,6 +44,16 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.user.fields.vendors') }}
+                        </th>
+                        <td>
+                            @foreach($user->vendors as $id => $vendors)
+                                <span class="label label-info label-many">{{ $vendors->name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             Roles
                         </th>
                         <td>

@@ -66,7 +66,7 @@ class ManatalJobsApiController extends Controller
             $record['currency'] = $job->currency;
             $record['is_remote'] = $job->is_remote;*/
             //dd($record);
-            Job::create($record); 
+            Job::updateOrCreate($record); 
         }
         //dd($jobArray);
         

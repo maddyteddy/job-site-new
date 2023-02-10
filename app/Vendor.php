@@ -53,4 +53,9 @@ class Vendor extends Model implements HasMedia
 
         return $file;
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
