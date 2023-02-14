@@ -10,6 +10,8 @@ use App\Http\Requests\StoreJobRequest;
 use App\Http\Requests\UpdateJobRequest;
 use App\Job;
 use App\Location;
+use App\Candidate;
+use App\Candidatejob;
 use Gate;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -92,5 +94,28 @@ class JobsController extends Controller
         Job::whereIn('id', request('ids'))->delete();
 
         return response(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function storeCandidates(Request $request) {
+        $data = [
+            'full_name' => $request->full_name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'gender' => $request->gender,
+            'birth_date' => $request->birth_date,
+            'address' => $request->address,
+            'zipcode' => $request->zipcode,
+        ];
+        $candidate_id = Candidate::create($data)->id;
+        $job_id = $request->job_id;
+
+
+        Candidatejob::create([
+            'candidate_id' => $candidate_id,
+            'job_id' => $job_id
+        ]);
+
+        return redirect()->route('admin.jobs.index');
+
     }
 }

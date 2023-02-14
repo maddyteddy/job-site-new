@@ -110,6 +110,8 @@
                                     </form>
                                 @endcan
 
+                                    <a class="openModal" data-id="{{$job->id}}">Open Modal</a>
+
                             </td>
 
                         </tr>
@@ -119,11 +121,59 @@
         </div>
 
 
+        <!-- Modal -->
+        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Add Details</h3>
+            </div>
+            <div class="modal-body">
+                <table>
+                        <tr> 
+                            <td> <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Enter Full Name">
+                            <input type="hidden" name="job_id" id="job_id">    
+                        </tr>    
+                        <tr> 
+                            <td> <input type="text" name="email" id="email" class="form-control" placeholder="Enter Email">
+                        </tr>
+                        <tr> 
+                            <td> <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Enter Phone Number">
+                        </tr>
+                        <tr> 
+                            <td>
+                            <select class="form-control" id="gender" name="gender">
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            </td>    
+                        </tr>
+                        <tr> 
+                            <td> <input type="date" name="birth_date" id="birth_date" class="form-control" placeholder="Enter Birth Date">
+                        </tr>
+                        <tr> 
+                            <td> <input type="text" name="address" id="address" class="form-control" placeholder="Enter Address">
+                        </tr>
+                        <tr> 
+                            <td> <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="Enter zipcode">
+                        </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn close" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-primary btn_save">Save changes</button>
+            </div>
+        </div>
+        <!-- Modal End -->
+
     </div>
 </div>
+
+
+
 @endsection
 @section('scripts')
 @parent
+
 <script>
     $(function () {
   let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
@@ -167,6 +217,34 @@
             .columns.adjust();
     });
 })
+
+    $(".openModal").click(function(){
+        var job_id = $(this).attr("data-id");
+        $("#job_id").val(job_id);
+        $('#myModal').modal('show'); 
+
+    });
+    $(".close").click(function() {
+        $('#myModal').hide();
+    });
+
+    $(".btn_save").click(function() {
+        var url =  "{{ route('admin.jobs.candidates') }}";
+        var full_name = $("#full_name").val();
+        var email = $("#email").val();
+        var phone_number = $("#phone_number").val();
+        var gender = $("#gender").val();
+        var address = $("#address").val();
+        var zipcode = $("#zipcode").val();
+        var birth_date = $("#birth_date").val();
+        var job_id = $("#job_id").val();
+        $.ajax({
+          headers: {'x-csrf-token': _token},
+          method: 'POST',
+          url: url,
+          data: { full_name: full_name, email:email, phone_number:phone_number,gender:gender,address:address, zipcode:zipcode, birth_date:birth_date, job_id:job_id }})
+          .done(function () { location.reload() })
+    });
 
 </script>
 @endsection
