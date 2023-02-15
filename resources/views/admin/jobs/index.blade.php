@@ -127,17 +127,24 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3 id="myModalLabel">Add Details</h3>
             </div>
+            <form action="" method="POST" enctype="multipart/form-data">
+            @csrf    
             <div class="modal-body">
+
                 <table>
                         <tr> 
                             <td> <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Enter Full Name">
-                            <input type="hidden" name="job_id" id="job_id">    
+                            <input type="hidden" name="job_id" id="job_id">
+                            </td>  
                         </tr>    
                         <tr> 
                             <td> <input type="text" name="email" id="email" class="form-control" placeholder="Enter Email">
+                            </td>
                         </tr>
                         <tr> 
-                            <td> <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Enter Phone Number">
+                            <td> 
+                                <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Enter Phone Number">
+                            </td>
                         </tr>
                         <tr> 
                             <td>
@@ -149,19 +156,36 @@
                         </tr>
                         <tr> 
                             <td> <input type="date" name="birth_date" id="birth_date" class="form-control" placeholder="Enter Birth Date">
+                            </td>
                         </tr>
                         <tr> 
                             <td> <input type="text" name="address" id="address" class="form-control" placeholder="Enter Address">
+                            </td>
                         </tr>
                         <tr> 
                             <td> <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="Enter zipcode">
+                            </td>
                         </tr>
+                        <tr> 
+                            <td></td>
+                        </tr>
+                        <tr> 
+                            <td><input type="text" name="hourly_rate" id="hourly_rate" class="form-control" placeholder="Enter Hourly Rate"></td>
+                        </tr>
+                        <tr> 
+                            <td><input type="file" accept="application/pdf, document/*" name="cv" id="cv" class="form-control">Upload CV</td>
+                        </tr>
+                        <tr> 
+                            <td><input type="file" accept="application/pdf, document/*" name="document" id="document" class="form-control">Upload Document</td>
+                        </tr>
+
                 </table>
             </div>
             <div class="modal-footer">
                 <button class="btn close" data-dismiss="modal" aria-hidden="true">Close</button>
                 <button class="btn btn-primary btn_save">Save changes</button>
             </div>
+            </form>
         </div>
         <!-- Modal End -->
 
@@ -238,11 +262,17 @@
         var zipcode = $("#zipcode").val();
         var birth_date = $("#birth_date").val();
         var job_id = $("#job_id").val();
+        var hourly_rate = $("#hourly_rate").val();
+        
+        var fd = new FormData();
+        var files = $('#document')[0].files[0];
+        fd.append('file', files);
+        //alert(document_file);
         $.ajax({
           headers: {'x-csrf-token': _token},
           method: 'POST',
           url: url,
-          data: { full_name: full_name, email:email, phone_number:phone_number,gender:gender,address:address, zipcode:zipcode, birth_date:birth_date, job_id:job_id }})
+          data: { full_name: full_name, email:email, phone_number:phone_number,gender:gender,address:address, zipcode:zipcode, birth_date:birth_date, job_id:job_id, hourly_rate:hourly_rate, document_file:fd }})
           .done(function () { location.reload() })
     });
 

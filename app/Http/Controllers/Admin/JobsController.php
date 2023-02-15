@@ -97,6 +97,7 @@ class JobsController extends Controller
     }
 
     public function storeCandidates(Request $request) {
+        dd($request);
         $data = [
             'full_name' => $request->full_name,
             'email' => $request->email,
@@ -112,7 +113,8 @@ class JobsController extends Controller
 
         Candidatejob::create([
             'candidate_id' => $candidate_id,
-            'job_id' => $job_id
+            'job_id' => $job_id,
+            'hourly_rate' => $request->hourly_rate
         ]);
 
         return redirect()->route('admin.jobs.index');

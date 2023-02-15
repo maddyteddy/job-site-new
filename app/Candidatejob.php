@@ -14,7 +14,8 @@ class Candidatejob extends Model
 
     protected $fillable = [
         'candidate_id',
-        'job_id'
+        'job_id',
+        'hourly_rate'
     ];
 
 }
