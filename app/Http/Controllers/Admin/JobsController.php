@@ -124,7 +124,8 @@ class JobsController extends Controller
             Candidatejob::create([
                 'candidate_id' => $candidate_id,
                 'job_id' => $job_id,
-                'hourly_rate' => $post_data['hourly_rate']
+                'hourly_rate' => $post_data['hourly_rate'],
+                'created_by' => $user->id
             ]);
 
             if($request->hasfile('document_file') && isset( $_FILES['document_file']['name'] ) && $_FILES['document_file']['name'] ) {
@@ -154,10 +155,9 @@ class JobsController extends Controller
                     'document' => $cv_name
                 ]);
             }
-
-
             return redirect()->route('admin.jobs.index');
         } catch(Exception $e) {
+            return redirect()->route('admin.jobs.index');
             dd($e->getMessage());
         }
         

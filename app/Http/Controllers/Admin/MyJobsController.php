@@ -23,11 +23,11 @@ class MyJobsController extends Controller
 {
     public function index()
     {
-        //abort_if(Gate::denies('myjob_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Gate::denies('myjob_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $user = Auth::user();
-        //$jobId = Candidatejob::where('created_by', $user->id)->get('job_id')->toArray();
+        $jobId = Candidatejob::where('created_by', $user->id)->pluck('job_id')->toArray();
         //dd($jobId);
-        $jobs = Job::all();
+        $jobs = Job::whereIn('id', $jobId)->get();
 
         return view('admin.myjobs.index', compact('jobs'));
     }
