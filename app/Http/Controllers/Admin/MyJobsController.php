@@ -19,15 +19,17 @@ use Symfony\Component\HttpFoundation\Response;
 use \Auth;
 use Exception;
 
-class JobsController extends Controller
+class MyJobsController extends Controller
 {
     public function index()
     {
-        abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
+        //abort_if(Gate::denies('myjob_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $user = Auth::user();
+        //$jobId = Candidatejob::where('created_by', $user->id)->get('job_id')->toArray();
+        //dd($jobId);
         $jobs = Job::all();
 
-        return view('admin.jobs.index', compact('jobs'));
+        return view('admin.myjobs.index', compact('jobs'));
     }
 
     public function create()

@@ -127,10 +127,10 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <h3 id="myModalLabel">Add Details</h3>
             </div>
-            <form action="" method="POST" enctype="multipart/form-data">
-            @csrf    
+               
             <div class="modal-body">
-
+                <form action="" method="POST" enctype="multipart/form-data">
+                @csrf 
                 <table>
                         <tr> 
                             <td> <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Enter Full Name">
@@ -180,12 +180,13 @@
                         </tr>
 
                 </table>
+                </form>
             </div>
             <div class="modal-footer">
                 <button class="btn close" data-dismiss="modal" aria-hidden="true">Close</button>
                 <button class="btn btn-primary btn_save">Save changes</button>
             </div>
-            </form>
+            
         </div>
         <!-- Modal End -->
 
@@ -263,17 +264,39 @@
         var birth_date = $("#birth_date").val();
         var job_id = $("#job_id").val();
         var hourly_rate = $("#hourly_rate").val();
+        var document_file = {};
+        if( $('#document')[0].files != undefined ){
+          var document_file = $('#document')[0].files[0];  
+        }
+
+        var cv = {};
+        if( $('#cv')[0].files != undefined ){
+          var cv = $('#cv')[0].files[0];  
+        }
+
+        var formdata = new FormData();
+        formdata.append('full_name', full_name);
+        formdata.append('email', email);
+        formdata.append('phone_number', phone_number);
+        formdata.append('gender', gender);
+        formdata.append('address', address);
+        formdata.append('zipcode', zipcode);
+        formdata.append('birth_date', birth_date);
+        formdata.append('job_id', job_id);
+        formdata.append('hourly_rate', hourly_rate);
+        formdata.append('document_file', document_file);
+        formdata.append('cv', cv);
+
         
-        var fd = new FormData();
-        var files = $('#document')[0].files[0];
-        fd.append('file', files);
-        //alert(document_file);
         $.ajax({
-          headers: {'x-csrf-token': _token},
+          headers: {'x-csrf-token': $('meta[name="csrf-token"]').attr('content')},
           method: 'POST',
           url: url,
-          data: { full_name: full_name, email:email, phone_number:phone_number,gender:gender,address:address, zipcode:zipcode, birth_date:birth_date, job_id:job_id, hourly_rate:hourly_rate, document_file:fd }})
-          .done(function () { location.reload() })
+          data: formdata,
+          contentType: false,
+          processData: false,
+          dataType: 'json',
+            }).done(function () { location.reload() })
     });
 
 </script>

@@ -44,6 +44,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     Route::resource('jobs', 'JobsController');
     Route::post('jobs/candidates', 'JobsController@storeCandidates')->name('jobs.candidates');
 
+    // MyJobs
+    Route::resource('myjobs', 'MyJobsController');
+    Route::delete('myjobs/destroy', 'MyJobsController@massDestroy')->name('myjobs.massDestroy');
+
     // Vendors
     Route::delete('vendors/destroy', 'VendorsController@massDestroy')->name('vendors.massDestroy');
     Route::post('vendors/media', 'VendorsController@storeMedia')->name('vendors.storeMedia');

@@ -171,7 +171,27 @@ class PermissionsTableSeeder extends Seeder
             [
                 'id'    => '41',
                 'title' => 'vendor_access',
-            ]
+            ],
+            [
+                'id'    => '42',
+                'title' => 'myjob_create',
+            ],
+            [
+                'id'    => '43',
+                'title' => 'myjob_edit',
+            ],
+            [
+                'id'    => '44',
+                'title' => 'myjob_show',
+            ],
+            [
+                'id'    => '45',
+                'title' => 'myjob_delete',
+            ],
+            [
+                'id'    => '46',
+                'title' => 'myjob_access',
+            ],
         ];
 
         Permission::insert($permissions);

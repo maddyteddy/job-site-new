@@ -26,6 +26,7 @@ class Candidate extends Authenticatable
         'birth_date',
         'address',
         'zipcode',
+        'created_by',
         'created_at',
         'updated_at'
     ];

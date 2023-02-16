@@ -102,6 +102,16 @@
                     </a>
                 </li>
             @endcan
+            @can('myjob_access')
+                <li class="nav-item">
+                    <a href="{{ route("admin.myjobs.index") }}" class="nav-link {{ request()->is('admin/myjobs') || request()->is('admin/myjobs/*') ? 'active' : '' }}">
+                        <i class="fa-fw fas fa-briefcase nav-icon">
+
+                        </i>
+                        {{ trans('cruds.myjob.title') }}
+                    </a>
+                </li>
+            @endcan
             <li class="nav-item">
                 <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logoutform').submit();">
                     <i class="nav-icon fas fa-fw fa-sign-out-alt">
