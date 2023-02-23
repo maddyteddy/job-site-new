@@ -209,4 +209,8 @@ return [
             'salary_helper'            => '',
         ],
     ],
+    'joblatest' => [
+        'title'          => 'Latest Job',
+        'title_singular' => 'Latest Job',
+    ],
 ];

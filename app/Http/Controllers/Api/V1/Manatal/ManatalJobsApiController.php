@@ -68,7 +68,9 @@ class ManatalJobsApiController extends Controller
             //dd($record);
             Job::updateOrCreate($record); 
         }
-        //dd($jobArray);
+        $jobs = Job::all();
+
+        return redirect()->route('admin.jobs.index');
         
 
     }
