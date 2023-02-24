@@ -36,7 +36,7 @@ class Job extends Model
         'salary_max',
         'headcount',
         'external_id',
-        'hash',
+        'job_id',
         'organization',
         'address',
         'zipcode',

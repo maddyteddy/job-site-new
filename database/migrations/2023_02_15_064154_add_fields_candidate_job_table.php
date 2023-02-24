@@ -15,6 +15,8 @@ class AddFieldsCandidateJobTable extends Migration
     {
         Schema::table('candidate_job_specific_details', function (Blueprint $table) {
             $table->string('hourly_rate')->nullable()->after('job_id');
+            $table->unsignedInteger('created_by')->nullable()->after('hourly_rate');
+            $table->foreign('created_by')->references('id')->on('users');
         });
     }
 

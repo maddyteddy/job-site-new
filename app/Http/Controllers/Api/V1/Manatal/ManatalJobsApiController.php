@@ -34,6 +34,9 @@ class ManatalJobsApiController extends Controller
         foreach($jobsList->results as $job) {
             //$record['id'] = $job->id;
             $record = [];
+
+            $jobCheck = Job::where('job_id', $job->hash)->first();
+            $record['job_id'] = $job->hash;
             $record['title'] = isset($job->position_name) ? $job->position_name : null;
             $record['full_description'] = $job->description;
             $record['salary'] = isset($job->salary) ? $job->salary : 0;
@@ -44,7 +47,6 @@ class ManatalJobsApiController extends Controller
             $record['salary_max'] = $job->salary_max;
             $record['headcount'] = $job->headcount;
             $record['external_id'] = $job->external_id;
-            $record['hash'] = $job->hash;
             $record['organization'] = $job->organization;
             $record['address'] = $job->address;
             $record['zipcode'] = $job->zipcode;
@@ -54,8 +56,10 @@ class ManatalJobsApiController extends Controller
             $record['is_remote'] = $job->is_remote;
 
             $record['status'] = $job->status;
-            $record['created_at'] = $job->created_at;
-            $record['updated_at'] = $job->updated_at;
+            $start_date = date_create($job->created_at);
+            $record['created_at'] = date_format($start_date,"Y-m-d H:i:s");
+            $start_date = date_create($job->updated_at);
+            $record['updated_at'] = date_format($start_date,"Y-m-d H:i:s");
             
 
             $record['industry'] = '';
@@ -65,8 +69,15 @@ class ManatalJobsApiController extends Controller
             $record['creator'] = $job->creator;
             $record['currency'] = $job->currency;
             $record['is_remote'] = $job->is_remote;*/
-            //dd($record);
-            Job::updateOrCreate($record); 
+            if($jobCheck) {
+                //dd($record);
+                Job::where('job_id', $job->hash)
+                    ->update($record);
+            } else {
+                Job::create($record);
+            }
+            
+             
         }
         $jobs = Job::all();
 

@@ -20,6 +20,22 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.job.fields.external_id') }}
+                        </th>
+                        <td>
+                            {{ $job->external_id }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.job.fields.job_id') }}
+                        </th>
+                        <td>
+                            {{ $job->job_id }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.job.fields.title') }}
                         </th>
                         <td>
@@ -32,6 +48,46 @@
                         </th>
                         <td>
                             {{ $job->company->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.job.fields.industry') }}
+                        </th>
+                        <td>
+                            {{ $job->company->industry ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.job.fields.organization') }}
+                        </th>
+                        <td>
+                            {{ $job->organization ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.job.fields.headcount') }}
+                        </th>
+                        <td>
+                            {{ $job->headcount ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.job.fields.creator') }}
+                        </th>
+                        <td>
+                            {{ $job->creator ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.job.fields.owner') }}
+                        </th>
+                        <td>
+                            {{ $job->owner ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -79,7 +135,7 @@
                             {{ trans('cruds.job.fields.address') }}
                         </th>
                         <td>
-                            {{ $job->address }}
+                            {{ $job->address }} {{ $job->zipcode }}
                         </td>
                     </tr>
                     <tr>
@@ -97,7 +153,63 @@
                             {{ trans('cruds.job.fields.salary') }}
                         </th>
                         <td>
-                            {{ $job->salary }}
+                            {{ $job->salary }} {{ $job->currency }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.job.fields.salary_min') }}
+                        </th>
+                        <td>
+                            {{ $job->salary_min }} {{ $job->currency }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.job.fields.salary_max') }}
+                        </th>
+                        <td>
+                            {{ $job->salary_max }} {{ $job->currency }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.job.fields.is_remote') }}
+                        </th>
+                        <td>
+                            <input type="checkbox" disabled {{ $job->is_remote ? "checked" : "" }}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.job.fields.is_published') }}
+                        </th>
+                        <td>
+                            <input type="checkbox" disabled {{ $job->is_published ? "checked" : "" }}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.job.fields.status') }}
+                        </th>
+                        <td>
+                            {{ $job->status ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.job.fields.career_page_url') }}
+                        </th>
+                        <td>
+                            <a href="{{ $job->career_page_url ?? '' }}" target="_blank">{{ $job->career_page_url ?? '' }}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.job.fields.is_pinned_in_career_page') }}
+                        </th>
+                        <td>
+                            <input type="checkbox" disabled {{ $job->is_pinned_in_career_page ? "checked" : "" }}>
                         </td>
                     </tr>
                     <tr>
