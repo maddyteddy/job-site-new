@@ -11,7 +11,7 @@
 @endcan
 <div class="card">
     <div class="card-header">
-        {{ trans('cruds.myjob.title_singular') }} {{ trans('global.list') }}
+        {{ trans('cruds.candidate.title_singular') }} {{ trans('global.list') }}
     </div>
 
     <div class="card-body">
@@ -23,80 +23,69 @@
 
                         </th>
                         <th>
-                            {{ trans('cruds.myjob.fields.id') }}
+                            {{ trans('cruds.candidate.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.myjob.fields.title') }}
+                            {{ trans('cruds.candidate.fields.name') }}
                         </th>
                         <th>
-                            {{ trans('cruds.myjob.fields.company') }}
+                            {{ trans('cruds.candidate.fields.email') }}
                         </th>
                         <th>
-                            {{ trans('cruds.myjob.fields.short_description') }}
+                            {{ trans('cruds.candidate.fields.phone_number') }}
                         </th>
                         <th>
-                            {{ trans('cruds.myjob.fields.location') }}
+                            {{ trans('cruds.candidate.fields.gender') }}
                         </th>
                         <th>
-                            {{ trans('cruds.myjob.fields.address') }}
+                            {{ trans('cruds.candidate.fields.birth_date') }}
                         </th>
                         <th>
-                            {{ trans('cruds.myjob.fields.categories') }}
+                            {{ trans('cruds.candidate.fields.address') }}
                         </th>
                         <th>
-                            {{ trans('cruds.myjob.fields.salary') }}
+                            {{ trans('cruds.candidate.fields.zipcode') }}
                         </th>
                         <th>
-                            {{ trans('cruds.myjob.fields.top_rated') }}
+                            {{ trans('cruds.candidate.fields.created_at') }}
                         </th>
-                        <th>
-                            &nbsp;
-                        </th>
+                        
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($jobs as $key => $myjob)
-                        <tr data-entry-id="{{ $myjob->id }}">
+                    @foreach($listCandidate as $key => $candidate)
+                        <tr data-entry-id="{{ $candidate->id }}">
                             <td>
 
                             </td>
                             <td>
-                                {{ $myjob->id ?? '' }}
+                                {{ $candidate->id ?? '' }}
                             </td>
                             <td>
-                                {{ $myjob->title ?? '' }}
+                                {{ $candidate->full_name ?? '' }}
                             </td>
                             <td>
-                                {{ $myjob->company->name ?? '' }}
+                                {{ $candidate->email ?? '' }}
                             </td>
                             <td>
-                                {{ $myjob->short_description ?? '' }}
+                                {{ $candidate->phone_number ?? '' }}
                             </td>
                             <td>
-                                {{ $myjob->location->name ?? '' }}
+                                {{ $candidate->gender ?? '' }}
                             </td>
                             <td>
-                                {{ $myjob->address ?? '' }}
+                                {{ $candidate->birth_date ?? '' }}
                             </td>
                             <td>
-                                @foreach($myjob->categories as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
+                                {{ $candidate->address ?? '' }}
                             </td>
                             <td>
-                                {{ $myjob->salary ?? '' }}
+                                {{ $candidate->zipcode ?? '' }}
                             </td>
                             <td>
-                                {{ $myjob->top_rated ? trans('global.yes') : trans('global.no') }}
+                                {{ $candidate->created_at ?? '' }}
                             </td>
-                            <td>
-                                <a class="btn btn-xs btn-info" href="{{ route('admin.myjobs.show', $myjob->id) }}">
-                                        View
-                                </a>
-                                <a class="btn btn-xs btn-info" href="{{ route('admin.myjobs.viewCandidate', $myjob->id) }}">
-                                        View Candidate
-                                </a>
-                            </td>
+                            
 
                         </tr>
                     @endforeach

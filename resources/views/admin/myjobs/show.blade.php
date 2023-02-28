@@ -20,6 +20,22 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.myjob.fields.external_id') }}
+                        </th>
+                        <td>
+                            {{ $myjob->external_id }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.myjob.fields.job_id') }}
+                        </th>
+                        <td>
+                            {{ $myjob->job_id }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.myjob.fields.title') }}
                         </th>
                         <td>
@@ -32,6 +48,46 @@
                         </th>
                         <td>
                             {{ $myjob->company->name ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.myjob.fields.industry') }}
+                        </th>
+                        <td>
+                            {{ $myjob->company->industry ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.myjob.fields.organization') }}
+                        </th>
+                        <td>
+                            {{ $myjob->organization ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.myjob.fields.headcount') }}
+                        </th>
+                        <td>
+                            {{ $myjob->headcount ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.myjob.fields.creator') }}
+                        </th>
+                        <td>
+                            {{ $myjob->creator ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.myjob.fields.owner') }}
+                        </th>
+                        <td>
+                            {{ $myjob->owner ?? '' }}
                         </td>
                     </tr>
                     <tr>
@@ -60,10 +116,10 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.myjob.fields.myjob_nature') }}
+                            {{ trans('cruds.myjob.fields.job_nature') }}
                         </th>
                         <td>
-                            {{ $myjob->myjob_nature }}
+                            {{ $myjob->job_nature }}
                         </td>
                     </tr>
                     <tr>
@@ -79,7 +135,7 @@
                             {{ trans('cruds.myjob.fields.address') }}
                         </th>
                         <td>
-                            {{ $myjob->address }}
+                            {{ $myjob->address }} {{ $myjob->zipcode }}
                         </td>
                     </tr>
                     <tr>
@@ -97,7 +153,63 @@
                             {{ trans('cruds.myjob.fields.salary') }}
                         </th>
                         <td>
-                            {{ $myjob->salary }}
+                            {{ $myjob->salary }} {{ $myjob->currency }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.myjob.fields.salary_min') }}
+                        </th>
+                        <td>
+                            {{ $myjob->salary_min }} {{ $myjob->currency }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.myjob.fields.salary_max') }}
+                        </th>
+                        <td>
+                            {{ $myjob->salary_max }} {{ $myjob->currency }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.myjob.fields.is_remote') }}
+                        </th>
+                        <td>
+                            <input type="checkbox" disabled {{ $myjob->is_remote ? "checked" : "" }}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.myjob.fields.is_published') }}
+                        </th>
+                        <td>
+                            <input type="checkbox" disabled {{ $myjob->is_published ? "checked" : "" }}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.myjob.fields.status') }}
+                        </th>
+                        <td>
+                            {{ $myjob->status ?? '' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.myjob.fields.career_page_url') }}
+                        </th>
+                        <td>
+                            <a href="{{ $myjob->career_page_url ?? '' }}" target="_blank">{{ $myjob->career_page_url ?? '' }}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.myjob.fields.is_pinned_in_career_page') }}
+                        </th>
+                        <td>
+                            <input type="checkbox" disabled {{ $myjob->is_pinned_in_career_page ? "checked" : "" }}>
                         </td>
                     </tr>
                     <tr>

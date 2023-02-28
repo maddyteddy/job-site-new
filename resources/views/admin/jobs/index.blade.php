@@ -110,7 +110,7 @@
                                     </form>
                                 @endcan
 
-                                    <a class="openModal" data-id="{{$job->id}}">Open Modal</a>
+                                <a class="openModal" data-id="{{$job->id}}">Open Modal</a>
 
                             </td>
 

@@ -76,13 +76,14 @@ class MyJobsController extends Controller
         return redirect()->route('admin.jobs.index');
     }
 
-    public function show(Job $job)
+    public function show(Job $myjob)
     {
         abort_if(Gate::denies('job_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $job->load('company', 'location', 'categories');
+        $myjob->load('company', 'location', 'categories');
 
-        return view('admin.jobs.show', compact('job'));
+
+        return view('admin.myjobs.show', compact('myjob'));
     }
 
     public function destroy(Job $job)
@@ -164,5 +165,11 @@ class MyJobsController extends Controller
         }
         
 
+    }
+    public function viewCandidate($id) {
+        $candidate = CandidateJob::where('job_id', $id)->pluck('candidate_id')->toArray();
+        $listCandidate = Candidate::whereIn('id', $candidate)->get();
+
+        return view('admin.myjobs.candidate', compact('listCandidate'));
     }
 }
