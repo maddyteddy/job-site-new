@@ -107,17 +107,10 @@
                                     <i class="fa-fw fas fa-briefcase nav-icon">
 
                                     </i>
-                                    {{ trans('cruds.job.title') }}
+                                    {{ trans('cruds.job.alljobs') }}
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{ route("manataljobs") }}" class="nav-link">
-                                    <i class="fa-fw fas fa-briefcase nav-icon">
-
-                                    </i>
-                                    {{ trans('cruds.joblatest.title') }}
-                                </a>
-                            </li>
+                           
                         @endcan
                         @can('myjob_access')
                             <li class="nav-item">

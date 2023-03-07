@@ -12,6 +12,9 @@
 <div class="card">
     <div class="card-header">
         {{ trans('cruds.job.title_singular') }} {{ trans('global.list') }}
+        @can('job_fetch')
+        <a href="{{ route("manataljobs") }}"  class="btn btn-primary btn_save">Fetch Jobs</a>
+        @endcan
     </div>
 
     <div class="card-body">
@@ -110,8 +113,11 @@
                                     </form>
                                 @endcan
 
-                                <a class="openModal" data-id="{{$job->id}}">Open Modal</a>
-
+                                @can('job_candidate_add_allow')
+                                <button type="button" class="openModal btn btn-xs btn-primary" data-toggle="modal" data-id="{{$job->id}}">
+                                Add Candidate
+                                </button>
+                                @endcan
                             </td>
 
                         </tr>
@@ -120,77 +126,74 @@
             </table>
         </div>
 
+       
 
-        <!-- Modal -->
-        <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3 id="myModalLabel">Add Details</h3>
-            </div>
-               
-            <div class="modal-body">
-                <form action="" method="POST" enctype="multipart/form-data">
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <form action="" method="POST" enctype="multipart/form-data">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Candidate</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           
                 @csrf 
-                <table>
-                        <tr> 
-                            <td> <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Enter Full Name">
-                            <input type="hidden" name="job_id" id="job_id">
-                            </td>  
-                        </tr>    
-                        <tr> 
-                            <td> <input type="text" name="email" id="email" class="form-control" placeholder="Enter Email">
-                            </td>
-                        </tr>
-                        <tr> 
-                            <td> 
-                                <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Enter Phone Number">
-                            </td>
-                        </tr>
-                        <tr> 
-                            <td>
-                            <select class="form-control" id="gender" name="gender">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                            </select>
-                            </td>    
-                        </tr>
-                        <tr> 
-                            <td> <input type="date" name="birth_date" id="birth_date" class="form-control" placeholder="Enter Birth Date">
-                            </td>
-                        </tr>
-                        <tr> 
-                            <td> <input type="text" name="address" id="address" class="form-control" placeholder="Enter Address">
-                            </td>
-                        </tr>
-                        <tr> 
-                            <td> <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="Enter zipcode">
-                            </td>
-                        </tr>
-                        <tr> 
-                            <td></td>
-                        </tr>
-                        <tr> 
-                            <td><input type="text" name="hourly_rate" id="hourly_rate" class="form-control" placeholder="Enter Hourly Rate"></td>
-                        </tr>
-                        <tr> 
-                            <td><input type="file" accept="application/pdf, document/*" name="cv" id="cv" class="form-control">Upload CV</td>
-                        </tr>
-                        <tr> 
-                            <td><input type="file" accept="application/pdf, document/*" name="document" id="document" class="form-control">Upload Document</td>
-                        </tr>
-
-                </table>
-                </form>
+                <div class="form-group">
+                    <label for="full_name" class="col-form-label">Enter Full Name</label>
+                    <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Enter Full Name">
+                    <input type="hidden" name="job_id" id="job_id">
+                </div>
+          <div class="form-group">
+            <label for="email" class="col-form-label">Email:</label>
+             <input type="text" name="email" id="email" class="form-control" placeholder="Enter Email">
+          </div>
+          <div class="form-group">
+            <label for="phone_number" class="col-form-label">Phone Number:</label>
+                <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Enter Phone Number">
+          </div>
+          <div class="form-group">
+            <label for="" class="col-form-label">Gender:</label>
+                <input type="radio" name="gender" value="Male">Male
+                 <input type="radio" name="gender" value="Female">Female
+          </div>
+           <div class="form-group">
+            <label for="birth_date" class="col-form-label">Birth of Date:</label>
+               <input type="date" name="birth_date" id="birth_date" class="form-control" placeholder="Enter Birth Date">
+          </div>
+            <div class="form-group">
+            <label for="address" class="col-form-label">Address:</label>
+               <input type="text" name="address" id="address" class="form-control" placeholder="Enter Address">
             </div>
-            <div class="modal-footer">
-                <button class="btn close" data-dismiss="modal" aria-hidden="true">Close</button>
-                <button class="btn btn-primary btn_save">Save changes</button>
+             <div class="form-group">
+            <label for="zipcode" class="col-form-label">Zipcode:</label>
+               <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="Enter zipcode">
             </div>
-            
-        </div>
-        <!-- Modal End -->
-
+               <div class="form-group">
+            <label for="hourly_rate" class="col-form-label">Hourly Rate:</label>
+             <input type="text" name="hourly_rate" id="hourly_rate" class="form-control" placeholder="Enter Hourly Rate">
+            </div>
+              <div class="form-group">
+            <label for="zipcode" class="col-form-label">Upload CV:</label>
+               <input type="file" accept="application/pdf, document/*" name="cv" id="cv" class="form-control">
+            </div>
+             <div class="form-group">
+            <label for="zipcode" class="col-form-label">Upload Document:</label>
+              <input type="file" accept="application/pdf, document/*" name="document" id="document" class="form-control">
+            </div>
+             
+      </div>
+      <div class="modal-footer">
+                <button class="btn btn-primary btn_save">Save</button>
+      </div>
+      </form>
     </div>
+  </div>
+</div>
+</div>
 </div>
 
 
@@ -300,4 +303,7 @@
     });
 
 </script>
+
+<!-- Button trigger modal -->
+
 @endsection
