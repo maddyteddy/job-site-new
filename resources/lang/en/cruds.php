@@ -168,6 +168,7 @@ return [
     'job'            => [
         'title'          => 'Jobs',
         'title_singular' => 'Job',
+        'alljobs' => 'All Jobs',
         'fields'         => [
             'id'                       => 'ID',
             'id_helper'                => '',
