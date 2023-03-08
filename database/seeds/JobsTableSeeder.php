@@ -34,7 +34,7 @@ class JobsTableSeeder extends Seeder
             $job->salary = "15k - 25k";
             $job->top_rated = rand(0, 1);
             $job->external_id = 1;
-            $job->hash = 1;
+            $job->job_id = 1;
             $job->organization=1;
             //$table->string('position_name'); title
             //$table->string('description'); full_description
