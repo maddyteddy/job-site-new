@@ -43,7 +43,7 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'namespace' => 'Admin', 'mi
     // Jobs
     Route::delete('jobs/destroy', 'JobsController@massDestroy')->name('jobs.massDestroy');
     Route::resource('jobs', 'JobsController');
-    Route::post('jobs/candidates', 'JobsController@storeCandidates')->name('jobs.candidates');
+    Route::post('candidates', 'CandidateController@storeCandidates')->name('candidates');
 
     // MyJobs
     Route::resource('myjobs', 'MyJobsController');
