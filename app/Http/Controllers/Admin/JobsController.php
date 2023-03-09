@@ -24,7 +24,7 @@ class JobsController extends Controller
     public function index()
     {
         //print_r(session('message'));
-        abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        //abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $jobs = Job::all();
 
