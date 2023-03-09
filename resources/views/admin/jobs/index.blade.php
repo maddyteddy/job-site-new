@@ -150,17 +150,17 @@
             </div>
             <div class="form-group">
                 <label for="full_name" class="col-form-label">Enter Full Name*</label>
-                <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Enter Full Name" required>
+                <input type="text" name="full_name" id="full_name" class="form-control" placeholder="Enter Full Name" >
                 <span id="full_name_error"></span>
                 <input type="hidden" name="job_id" id="job_id">
             </div>
           <div class="form-group">
             <label for="email" class="col-form-label">Email*</label>
-             <input type="text" name="email" id="email" class="form-control" placeholder="Enter Email" required>
+             <input type="text" name="email" id="email" class="form-control" placeholder="Enter Email" >
           </div>
           <div class="form-group">
             <label for="phone_number" class="col-form-label">Phone Number*</label>
-                <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Enter Phone Number" required>
+                <input type="text" name="phone_number" id="phone_number" class="form-control" placeholder="Enter Phone Number" >
           </div>
           <div class="form-group">
             <label for="" class="col-form-label">Gender</label>
@@ -169,27 +169,27 @@
           </div>
            <div class="form-group">
             <label for="birth_date" class="col-form-label">Birth of Date*</label>
-               <input type="date" name="birth_date" id="birth_date" class="form-control" placeholder="Enter Birth Date" required>
+               <input type="date" name="birth_date" id="birth_date" class="form-control" placeholder="Enter Birth Date" >
           </div>
             <div class="form-group">
             <label for="address" class="col-form-label">Address</label>
-               <input type="text" name="address" id="address" class="form-control" placeholder="Enter Address" required>
+               <input type="text" name="address" id="address" class="form-control" placeholder="Enter Address" >
             </div>
              <div class="form-group">
             <label for="zipcode" class="col-form-label">Zipcode*</label>
-               <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="Enter zipcode" required>
+               <input type="text" name="zipcode" id="zipcode" class="form-control" placeholder="Enter zipcode" >
             </div>
             <div class="form-group">
             <label for="hourly_rate" class="col-form-label">Hourly Rate*</label>
-             <input type="text" name="hourly_rate" id="hourly_rate" class="form-control" placeholder="Enter Hourly Rate" required>
+             <input type="text" name="hourly_rate" id="hourly_rate" class="form-control" placeholder="Enter Hourly Rate" >
             </div>
               <div class="form-group">
             <label for="zipcode" class="col-form-label">Upload CV</label>
-               <input type="file" accept="application/pdf, document/*" name="cv" id="cv" class="form-control" required>
+               <input type="file" accept="application/pdf, document/*" name="cv" id="cv" class="form-control" >
             </div>
              <div class="form-group">
             <label for="zipcode" class="col-form-label">Upload Document</label>
-              <input type="file" accept="application/pdf, document/*" name="document" id="document" class="form-control" required>
+              <input type="file" accept="application/pdf, document/*" name="document" id="document" class="form-control" >
             </div>
              
       </div>
@@ -263,8 +263,8 @@
         $('#myModal').hide();
     });
 
-    $(".btn_save").click(function() {
-
+    $(".btn_save").click(function(event) {
+         event.preventDefault();
         var url =  "{{ route('admin.candidates') }}";
         var full_name = $("#full_name").val();
         var email = $("#email").val();
@@ -286,7 +286,7 @@
           var cv = $('#cv')[0].files[0];  
         }
 
-        if(full_name!="" && email!="" && phone_number!="" && address!="" && zipcode!="" && birth_date!="" && job_id != "" && hourly_rate!="" && cv!="" && document_file!="") {
+        // if(full_name!="" && email!="" && phone_number!="" && address!="" && zipcode!="" && birth_date!="" && job_id != "" && hourly_rate!="" && cv!="" && document_file!="") {
             var formdata = new FormData();
             formdata.append('full_name', full_name);
             formdata.append('email', email);
@@ -321,17 +321,18 @@
                    $.each(result.msg, function (fieldName, errorBag) {
                         let errorMessages = '';
                         $.each(errorBag, function(i, message) {
-                            if(message == 'Please enter valid email' || message == 'Please enter valid phone number' || message == 'Please enter only digits in phone' || message == 'Please enter 10 digits in phone' || message == 'Please enter only digit in zipcode' || message == 'Please upload only Doc or PDF file in document' || message == 'Maximum file size to upload is 8MB (10 MB) in document' || message == 'Please upload only Doc or PDF file in cv' || message == 'Maximum file size to upload is 8MB (10 MB) in cv'){
-                                errorMessages += message+'<br>';    
-                            }
+                            // if(message == 'Please enter valid email' || message == 'Please enter valid phone number' || message == 'Please enter only digits in phone' || message == 'Please enter 10 digits in phone' || message == 'Please enter only digit in zipcode' || message == 'Please upload only Doc or PDF file in document' || message == 'Maximum file size to upload is 8MB (10 MB) in document' || message == 'Please upload only Doc or PDF file in cv' || message == 'Maximum file size to upload is 8MB (10 MB) in cv'){
+                            //     errorMessages += message+'<br>';    
+                            // }
+                            errorMessages += message+'<br>';    
                         });
                         $(".error_group").append(errorMessages);
-                        setTimeout(function(){ $(".error_group").hide() }, 3000);
+                        //setTimeout(function(){ $(".error_group").hide() }, 3000);
                     }); 
                 }
               }
             });    
-        }
+      //  }
 
         
     });
