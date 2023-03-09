@@ -68,7 +68,10 @@
                         </div>
                     </div>
                 @endif
-                @if($errors->count() > 0)
+                @php
+                    $urlCheck = Request::is('admin/jobs');
+                @endphp
+                @if($errors->count() > 0 && !$urlCheck)
                     <div class="alert alert-danger">
                         <ul class="list-unstyled">
                             @foreach($errors->all() as $error)
