@@ -18,7 +18,7 @@
     <div class="card-header">
         {{ trans('cruds.job.title_singular') }} {{ trans('global.list') }}
         @can('job_fetch')
-        <a href="{{ route("manataljobs") }}"  class="btn btn-primary btn_save">Fetch Jobs</a>
+        <a href="{{ route("manataljobs") }}"  class="btn btn-primary ">Fetch Jobs</a>
         @endcan
     </div>
 
@@ -36,26 +36,21 @@
                         <th>
                             {{ trans('cruds.job.fields.title') }}
                         </th>
-                        <th>
-                            {{ trans('cruds.job.fields.company') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.job.fields.short_description') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.job.fields.location') }}
+                         <th>
+                            {{ trans('cruds.job.fields.job_nature') }}
                         </th>
                         <th>
                             {{ trans('cruds.job.fields.address') }}
                         </th>
-                        <th>
-                            {{ trans('cruds.job.fields.categories') }}
-                        </th>
+                       
                         <th>
                             {{ trans('cruds.job.fields.salary') }}
                         </th>
-                        <th>
-                            {{ trans('cruds.job.fields.top_rated') }}
+                           <th>
+                            {{ trans('cruds.job.fields.status') }}
+                        </th>
+                         <th>
+                            {{ trans('cruds.job.fields.career_page_url') }}
                         </th>
                         <th>
                             &nbsp;
@@ -74,29 +69,25 @@
                             <td>
                                 {{ $job->title ?? '' }}
                             </td>
-                            <td>
-                                {{ $job->company->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $job->short_description ?? '' }}
-                            </td>
-                            <td>
-                                {{ $job->location->name ?? '' }}
+                             <td>
+                                {{ str_replace('_',' ',ucwords($job->job_nature)) ?? '' }}
                             </td>
                             <td>
                                 {{ $job->address ?? '' }}
                             </td>
+                           
                             <td>
-                                @foreach($job->categories as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
+                                {{ $job->salary_min ?? '' }} {{ $job->salary_min  ? '-' : '' }}  {{ $job->salary_max ?? '' }} {{ $job->salary_min ? $job->currency : '' }}
                             </td>
-                            <td>
-                                {{ $job->salary ?? '' }}
+                               <td>
+                                {{ ucwords($job->status) ?? '' }}
                             </td>
-                            <td>
-                                {{ $job->top_rated ? trans('global.yes') : trans('global.no') }}
+                             <td>
+                               @if($job->career_page_url)
+                                <a href="{{ $job->career_page_url }}" > Career Page </a>
+                               @endif
                             </td>
+                            
                             <td>
                                 @can('job_show')
                                     <a class="btn btn-xs btn-primary" href="{{ route('admin.jobs.show', $job->id) }}">

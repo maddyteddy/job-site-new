@@ -15,7 +15,7 @@ class JobsTableSeeder extends Seeder
      */
     public function run()
     {
-        $categories = Category::pluck('id');
+       /* $categories = Category::pluck('id');
         $companies = Company::pluck('id');
         $locations = Location::pluck('id');
         $faker = Faker\Factory::create();
@@ -24,15 +24,15 @@ class JobsTableSeeder extends Seeder
         {
             $job = new Job;
             $job->title = $faker->unique()->jobTitle;
-            $job->short_description = $faker->sentence;
+            //$job->short_description = $faker->sentence;
             $job->full_description = $faker->paragraph;
-            $job->requirements = $faker->paragraph;
+           // $job->requirements = $faker->paragraph;
             $job->job_nature = "Full-time";
-            $job->company_id = $companies->random();
-            $job->location_id = $locations->random();
+            // $job->company_id = 0;
+            // $job->location_id = 0;
             $job->address = $faker->unique()->address;
-            $job->salary = "15k - 25k";
-            $job->top_rated = rand(0, 1);
+           // $job->salary = "15k - 25k";
+           // $job->top_rated = rand(0, 1);
             $job->external_id = 1;
             $job->job_id = 1;
             $job->organization=1;
@@ -57,6 +57,7 @@ class JobsTableSeeder extends Seeder
             $job->industry = 1;
             $job->save();
             $job->categories()->sync($categories->random(rand(1,3)));
-        }
+           
+        } */
     }
 }
