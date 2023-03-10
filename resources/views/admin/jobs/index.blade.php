@@ -23,103 +23,67 @@
     </div>
 
     <div class="card-body">
-        <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-Job">
-                <thead>
-                    <tr>
-                        <th width="10">
-
-                        </th>
-                        <th>
-                            {{ trans('cruds.job.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.job.fields.title') }}
-                        </th>
-                         <th>
-                            {{ trans('cruds.job.fields.job_nature') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.job.fields.address') }}
-                        </th>
-                       
-                        <th>
-                            {{ trans('cruds.job.fields.salary') }}
-                        </th>
-                           <th>
-                            {{ trans('cruds.job.fields.status') }}
-                        </th>
-                         <th>
-                            {{ trans('cruds.job.fields.career_page_url') }}
-                        </th>
-                        <th>
-                            &nbsp;
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
+       
                     @foreach($jobs as $key => $job)
-                        <tr data-entry-id="{{ $job->id }}">
-                            <td>
 
-                            </td>
-                            <td>
-                                {{ $job->id ?? '' }}
-                            </td>
-                            <td>
-                                {{ $job->title ?? '' }}
-                            </td>
-                             <td>
-                                {{ str_replace('_',' ',ucwords($job->job_nature)) ?? '' }}
-                            </td>
-                            <td>
-                                {{ $job->address ?? '' }}
-                            </td>
-                           
-                            <td>
-                                {{ $job->salary_min ?? '' }} {{ $job->salary_min  ? '-' : '' }}  {{ $job->salary_max ?? '' }} {{ $job->salary_min ? $job->currency : '' }}
-                            </td>
-                               <td>
-                                {{ ucwords($job->status) ?? '' }}
-                            </td>
-                             <td>
-                               @if($job->career_page_url)
-                                <a href="{{ $job->career_page_url }}" > Career Page </a>
-                               @endif
-                            </td>
-                            
-                            <td>
-                                @can('job_show')
-                                    <a class="btn btn-xs btn-primary" href="{{ route('admin.jobs.show', $job->id) }}">
-                                        {{ trans('global.view') }}
+                        <div class="joblist card" data-entry-id="{{ $job->id }}">
+                       <!--  <div class="card-header">
+                        Featured
+                        </div> -->
+                        <div class="card-body">
+                        <div class="card-details">
+                        <h5 class="card-title"> {{ $job->title ?? '' }} - {{ str_replace('_',' ',ucwords($job->job_nature)) ?? '' }}  {{ $job->is_remote == 1 ? ' - Remote' : ''}}</h5>
+
+                        <p class="card-text"> {{ $job->address ?? '' }} {{ $job->salary_min ?? '' }} {{ $job->salary_min  ? '-' : '' }}  {{ $job->salary_max ?? '' }} {{ $job->salary_min ? $job->currency : '' }} {{ str_replace('_',' ',ucwords($job->status)) ?? '' }}</p>
+                        <div class="card-footerend">
+                          <div class="card-footerlinks">
+                           @can('job_show')
+                                    <a class="" href="{{ route('admin.jobs.show', $job->id) }}">
+                                        Job Description
                                     </a>
-                                @endcan
-
-                                @can('job_edit')
-                                    <a class="btn btn-xs btn-info" href="{{ route('admin.jobs.edit', $job->id) }}">
+                            @endcan
+                             <a class="" href="{{ route('admin.jobs.show', $job->id) }}">
+                                       Candidate pipeline
+                                    </a>
+                            
+                             @if($job->career_page_url)
+                          <a href="{{ $job->career_page_url }}" > Career Page </a>
+                          @endif
+                           @can('job_edit')
+                                    <a class="" href="{{ route('admin.jobs.edit', $job->id) }}">
                                         {{ trans('global.edit') }}
                                     </a>
                                 @endcan
-
-                                @can('job_delete')
+                            @can('job_delete')
                                     <form action="{{ route('admin.jobs.destroy', $job->id) }}" method="POST" onsubmit="return confirm('{{ trans('global.areYouSure') }}');" style="display: inline-block;">
                                         <input type="hidden" name="_method" value="DELETE">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                        <input type="submit" class="btn btn-xs btn-danger" value="{{ trans('global.delete') }}">
+                                        <input type="submit" class="btn btn-primary" value="{{ trans('global.delete') }}">
                                     </form>
                                 @endcan
-
-                                @can('job_candidate_add_allow')
-                                <button type="button" class="openModal btn btn-xs btn-primary" data-toggle="modal" data-id="{{$job->id}}">
-                                Add Candidate
-                                </button>
-                                @endcan
-                            </td>
-
-                        </tr>
+                         </div>
+                          
+                          @can('job_candidate_add_allow')
+                            <button type="button" class="openModal btn btn-primary" data-toggle="modal" data-id="{{$job->id}}">
+                            Submit Candidate
+                            </button>
+                          @endcan
+                      </div>
+                    </div>
+                    <div class="discount">
+                        <h5 class="card-title">Direct Hire</h5>
+                        <div class="card-text"> 
+                         <p> Your reward</p>
+                          <span>10%</span>
+                <p>of base salary 
+                <br>Estimate: $8,050 </p>
+<p>Guarantee period: 90 days</p></div>
+                    </div>
+                        </div>
+                        </div>
+                    
                     @endforeach
-                </tbody>
-            </table>
+            
         </div>
 
        
