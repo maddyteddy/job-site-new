@@ -106,3 +106,68 @@ table.dataTable thead .sorting_desc {
     padding-left: 0px;
     padding-right: 0px;
 }
+/* joblist list page*/
+.joblist.card{
+    border-radius: 10px;
+}
+.joblist.card:hover {
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
+}
+.joblist.card .card-footerend {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 50px;
+}
+.joblist .card-body {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.joblist .card-body .card-details{
+    width: 80%;
+}
+
+.joblist .card-footerlinks a {
+    font-size: 18px;
+    margin-right: 41px;
+}
+.joblist .card-text {
+    font-size: 16px;
+}
+
+
+.joblist .card-title {
+    font-size: 24px;
+}
+.joblist .card-footerend .btn{
+    font-size: 20px;
+}
+.joblist .discount{
+        background: #f2f2f2;
+        width:180px;
+        border-radius: 10px;
+        padding-bottom: 10px
+}
+
+.joblist .discount .card-title{
+    background: #e2ae00;
+    padding: 5px;
+    color: #fff;
+    margin-bottom: 0;
+    border-top-right-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+}
+.joblist .discount .card-text {
+    text-align: center;
+}
+.joblist .discount .card-text p {
+    margin: 0;
+    font-size: 14px;
+}
+.joblist .discount .card-text span {
+        font-size: 27px;
+        font-weight: 700;
+}
