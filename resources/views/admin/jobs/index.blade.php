@@ -172,7 +172,7 @@
                <input type="date" name="birth_date" id="birth_date" class="form-control" placeholder="Enter Birth Date" >
           </div>
             <div class="form-group">
-            <label for="address" class="col-form-label">Address</label>
+            <label for="address" class="col-form-label">Address*</label>
                <input type="text" name="address" id="address" class="form-control" placeholder="Enter Address" >
             </div>
              <div class="form-group">

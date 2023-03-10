@@ -36,8 +36,8 @@ class CandidateController extends Controller
             'address' => 'required',
             'zipcode' => 'required|numeric',
             'hourly_rate' => 'required',
-            'document_file' =>  'required|mimes:docx,pdf,PDF,DOCX,doc,DOC|max:10240',
-            'cv' =>  'required|mimes:docx,pdf,PDF,DOCX,doc,DOC|max:10240'
+            'document_file' =>  'required|mimes:docx,pdf,PDF,DOCX,doc,DOC',
+            'cv' =>  'required|mimes:docx,pdf,PDF,DOCX,doc,DOC'
         );
         
         $msgs = array(
@@ -54,10 +54,8 @@ class CandidateController extends Controller
             'hourly_rate.required' => 'Required hourly rate',
             'document_file.required' => 'Please upload document.',
             'document_file.mimes' => 'Please upload only Doc or PDF file in document',
-            'document_file.max' => 'Maximum file size to upload is 8MB (10 MB) in document',
             'cv.required' => 'Please upload cv',
             'cv.mimes' => 'Please upload only Doc or PDF file in cv',
-            'cv.max' => 'Maximum file size to upload is 8MB (10 MB) in cv',
         );
 
         $validator = Validator::make($post_data, $rules, $msgs);
