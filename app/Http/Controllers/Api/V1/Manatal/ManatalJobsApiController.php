@@ -29,7 +29,9 @@ class ManatalJobsApiController extends Controller
         ]);
         $res_data =  $response->getBody();
         $jobsList =  json_decode($res_data);
-        //print_r($jobsList);
+        echo '<pre>';
+        print_r($jobsList);
+        exit;
         $jobArray = [];
         foreach($jobsList->results as $job) {
             //$record['id'] = $job->id;
@@ -39,22 +41,22 @@ class ManatalJobsApiController extends Controller
             $record['job_id'] = $job->hash;
             $record['title'] = isset($job->position_name) ? $job->position_name : null;
             $record['full_description'] = $job->description;
-            $record['salary'] = isset($job->salary) ? $job->salary : 0;
-            $record['location_id'] = isset($job->location_id) ? $job->location_id : 1;
-            $record['company_id'] = isset($job->company_id) ? $job->company_id : 1;
+            //$record['salary'] = isset($job->salary) ? $job->salary : 0;
+           // $record['location_id'] = isset($job->location_id) ? $job->location_id : 1;
+            //$record['company_id'] = isset($job->company_id) ? $job->company_id : 1;
             $record['career_page_url'] = isset($job->career_page_url) ? $job->career_page_url : 'test';
             $record['salary_min'] = $job->salary_min;
             $record['salary_max'] = $job->salary_max;
             $record['headcount'] = $job->headcount;
             $record['external_id'] = $job->external_id;
             $record['organization'] = $job->organization;
+            $record['job_nature'] = $job->contract_details;
             $record['address'] = $job->address;
             $record['zipcode'] = $job->zipcode;
-            $record['is_published'] = $job->is_published;
+            $record['is_published'] = $job->is_published?$job->is_published:1;
             $record['creator'] = $job->creator;
             $record['currency'] = $job->currency;
             $record['is_remote'] = $job->is_remote;
-
             $record['status'] = $job->status;
             $start_date = date_create($job->created_at);
             $record['created_at'] = date_format($start_date,"Y-m-d H:i:s");
@@ -75,6 +77,7 @@ class ManatalJobsApiController extends Controller
                     ->update($record);
             } else {
                 Job::create($record);
+                // echo 'exit';exit;
             }
             
              

@@ -51,14 +51,7 @@
                             {{ $job->title }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.job.fields.company') }}
-                        </th>
-                        <td>
-                            {{ $job->company->name ?? '' }}
-                        </td>
-                    </tr>
+                   
                     <tr>
                         <th>
                             {{ trans('cruds.job.fields.industry') }}
@@ -99,14 +92,7 @@
                             {{ $job->owner ?? '' }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.job.fields.short_description') }}
-                        </th>
-                        <td>
-                            {{ $job->short_description }}
-                        </td>
-                    </tr>
+                   
                     <tr>
                         <th>
                             {{ trans('cruds.job.fields.full_description') }}
@@ -115,30 +101,16 @@
                             {!! $job->full_description !!}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.job.fields.requirements') }}
-                        </th>
-                        <td>
-                            {!! $job->requirements !!}
-                        </td>
-                    </tr>
+                    
                     <tr>
                         <th>
                             {{ trans('cruds.job.fields.job_nature') }}
                         </th>
                         <td>
-                            {{ $job->job_nature }}
+                            {{ str_replace('_',' ',ucwords($job->job_nature)) ?? '' }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.job.fields.location') }}
-                        </th>
-                        <td>
-                            {{ $job->location->name ?? '' }}
-                        </td>
-                    </tr>
+                  
                     <tr>
                         <th>
                             {{ trans('cruds.job.fields.address') }}
@@ -147,24 +119,8 @@
                             {{ $job->address }} {{ $job->zipcode }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            Categories
-                        </th>
-                        <td>
-                            @foreach($job->categories as $id => $categories)
-                                <span class="label label-info label-many">{{ $categories->name }}</span>
-                            @endforeach
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.job.fields.salary') }}
-                        </th>
-                        <td>
-                            {{ $job->salary }} {{ $job->currency }}
-                        </td>
-                    </tr>
+                   
+                   
                     <tr>
                         <th>
                             {{ trans('cruds.job.fields.salary_min') }}
@@ -221,14 +177,7 @@
                             <input type="checkbox" disabled {{ $job->is_pinned_in_career_page ? "checked" : "" }}>
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.job.fields.top_rated') }}
-                        </th>
-                        <td>
-                            <input type="checkbox" disabled {{ $job->top_rated ? "checked" : "" }}>
-                        </td>
-                    </tr>
+                   
                 </tbody>
             </table>
             <a style="margin-top:20px;" class="btn btn-default" href="{{ url()->previous() }}">

@@ -13,19 +13,19 @@ class CreateJobsTable extends Migration
 
             $table->string('title');
 
-            $table->string('short_description')->nullable();
+           // $table->string('short_description')->nullable();
 
             $table->longText('full_description')->nullable();
 
-            $table->longText('requirements')->nullable();
+           // $table->longText('requirements')->nullable();
 
             $table->string('job_nature')->nullable();
 
             $table->string('address')->nullable();
 
-            $table->boolean('top_rated')->default(0)->nullable();
+          //  $table->boolean('top_rated')->default(0)->nullable();
 
-            $table->string('salary');
+          //  $table->string('salary');
 
             $table->timestamps();
 

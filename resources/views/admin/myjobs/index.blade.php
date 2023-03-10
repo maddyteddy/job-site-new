@@ -19,35 +19,30 @@
             <table class=" table table-bordered table-striped table-hover datatable datatable-myjob">
                 <thead>
                     <tr>
-                        <th width="10">
+                       <th width="10">
 
                         </th>
                         <th>
-                            {{ trans('cruds.myjob.fields.id') }}
+                            {{ trans('cruds.job.fields.id') }}
                         </th>
                         <th>
-                            {{ trans('cruds.myjob.fields.title') }}
+                            {{ trans('cruds.job.fields.title') }}
+                        </th>
+                         <th>
+                            {{ trans('cruds.job.fields.job_nature') }}
                         </th>
                         <th>
-                            {{ trans('cruds.myjob.fields.company') }}
+                            {{ trans('cruds.job.fields.address') }}
                         </th>
+                       
                         <th>
-                            {{ trans('cruds.myjob.fields.short_description') }}
+                            {{ trans('cruds.job.fields.salary') }}
                         </th>
-                        <th>
-                            {{ trans('cruds.myjob.fields.location') }}
+                           <th>
+                            {{ trans('cruds.job.fields.status') }}
                         </th>
-                        <th>
-                            {{ trans('cruds.myjob.fields.address') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.myjob.fields.categories') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.myjob.fields.salary') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.myjob.fields.top_rated') }}
+                         <th>
+                            {{ trans('cruds.job.fields.career_page_url') }}
                         </th>
                         <th>
                             &nbsp;
@@ -57,7 +52,7 @@
                 <tbody>
                     @foreach($jobs as $key => $myjob)
                         <tr data-entry-id="{{ $myjob->id }}">
-                            <td>
+                          <td>
 
                             </td>
                             <td>
@@ -66,28 +61,23 @@
                             <td>
                                 {{ $myjob->title ?? '' }}
                             </td>
-                            <td>
-                                {{ $myjob->company->name ?? '' }}
-                            </td>
-                            <td>
-                                {{ $myjob->short_description ?? '' }}
-                            </td>
-                            <td>
-                                {{ $myjob->location->name ?? '' }}
+                             <td>
+                                {{ str_replace('_',' ',ucwords($myjob->job_nature)) ?? '' }}
                             </td>
                             <td>
                                 {{ $myjob->address ?? '' }}
                             </td>
+                           
                             <td>
-                                @foreach($myjob->categories as $key => $item)
-                                    <span class="badge badge-info">{{ $item->name }}</span>
-                                @endforeach
+                                {{ $myjob->salary_min ?? '' }} {{ $myjob->salary_min  ? '-' : '' }}  {{ $myjob->salary_max ?? '' }} {{ $myjob->salary_min ? $myjob->currency : '' }}
                             </td>
-                            <td>
-                                {{ $myjob->salary ?? '' }}
+                               <td>
+                                {{ ucwords($myjob->status) ?? '' }}
                             </td>
-                            <td>
-                                {{ $myjob->top_rated ? trans('global.yes') : trans('global.no') }}
+                             <td>
+                               @if($myjob->career_page_url)
+                                <a href="{{ $myjob->career_page_url }}" > Career Page </a>
+                               @endif
                             </td>
                             <td>
                                 <a class="btn btn-xs btn-info" href="{{ route('admin.myjobs.show', $myjob->id) }}">
