@@ -29,9 +29,9 @@ class ManatalJobsApiController extends Controller
         ]);
         $res_data =  $response->getBody();
         $jobsList =  json_decode($res_data);
-        echo '<pre>';
-        print_r($jobsList);
-        exit;
+        // echo '<pre>';
+        // print_r($jobsList);
+        // exit;
         $jobArray = [];
         foreach($jobsList->results as $job) {
             //$record['id'] = $job->id;
