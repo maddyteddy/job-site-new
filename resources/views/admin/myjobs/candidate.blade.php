@@ -47,6 +47,12 @@
                             {{ trans('cruds.candidate.fields.zipcode') }}
                         </th>
                         <th>
+                            {{ trans('cruds.candidate.fields.cv') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.candidate.fields.document') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.candidate.fields.created_at') }}
                         </th>
                         
@@ -81,6 +87,18 @@
                             </td>
                             <td>
                                 {{ $candidate->zipcode ?? '' }}
+                            </td>
+                            <td>
+                                @if(isset($candidate->candidatedocument[0]->document))
+                                <a href="{{ asset('img/cv/'.$candidate->candidatedocument[0]->document) }}" target="_blank">Download</a>
+                                @else
+                                @endif
+                            </td>
+                            <td>
+                                @if(isset($candidate->candidatedocument[0]->document))
+                                <a href="{{ asset('img/document/'.$candidate->candidatedocument[1]->document) }}" target="_blank">Download</a>
+                                @else
+                                @endif
                             </td>
                             <td>
                                 {{ $candidate->created_at ?? '' }}
