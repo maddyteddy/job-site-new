@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use App\Candidate;
 
 class Candidatedocument extends Model 
 {
@@ -17,5 +18,10 @@ class Candidatedocument extends Model
         'is_cv',
         'document'
     ];
+
+    /*public function candidate():BelongsTo
+    {
+        return $this->belongsTo(Candidate::class);
+    }*/
 
 }

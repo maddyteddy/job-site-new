@@ -168,8 +168,7 @@ class MyJobsController extends Controller
     }
     public function viewCandidate($id) {
         $candidate = CandidateJob::where('job_id', $id)->pluck('candidate_id')->toArray();
-        $listCandidate = Candidate::whereIn('id', $candidate)->get();
-
+        $listCandidate = Candidate::with('candidatedocument')->whereIn('id', $candidate)->get();
         return view('admin.myjobs.candidate', compact('listCandidate'));
     }
 }
